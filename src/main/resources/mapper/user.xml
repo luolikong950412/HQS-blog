@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hello.huqingshan.mapper.UserMapper">
+    <!-- 如果返回的是集合，应该是集合包含的对象的类型 -官网 -->
+    <select id="selectUser" resultType="User">
+        select * from user
+    </select>
+</mapper>
