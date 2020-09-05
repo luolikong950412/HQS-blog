@@ -22,4 +22,5 @@ public class Result<T> {
         this.code = code;
         this.token = token;
     }
+
 }

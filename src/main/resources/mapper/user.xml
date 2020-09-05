@@ -5,7 +5,36 @@
 
 <mapper namespace="com.hello.huqingshan.mapper.UserMapper">
     <!-- 如果返回的是集合，应该是集合包含的对象的类型 -官网 -->
-    <select id="selectUser" resultType="User">
+    <!-- parametertype是可选的，mybatis会自动推断,建议写 -官网-->
+    <select id="selectUser" resultType="com.hello.huqingshan.model.User">
         select * from user
     </select>
+
+    <update id="updateUserInfoByUid">
+        <!-- 多余的逗号会被删掉 -->
+        update user
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="icon != null">icon = #{icon}</if>
+        </set>
+        <!-- 别把where写到set里面 -->
+        where uid = #{uid}
+    </update>
+
+    <delete id="deleteUserByUid">
+        delete from user where uid = #{uid}
+    </delete>
+
+    <select id="selectUserByUid" resultType="com.hello.huqingshan.model.User">
+        select * from user where uid = #{uid}
+    </select>
+
+    <insert id="registerUser">
+        insert into user (username,password,email,nickname,icon) values (#{username},#{password},#{email},#{nickname},#{icon})
+    </insert>
+
 </mapper>
