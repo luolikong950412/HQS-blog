@@ -11,11 +11,11 @@ public class LoginServer {
     @Autowired
     private UserMapper userMapper;
 
-    public void registerUser(User user){
-        userMapper.registerUser(user);
+    public int registerUser(User user){
+        return userMapper.registerUser(user);
     }
 
-    public void login(User user){
-        System.out.println("login");
+    public User login(User user){
+        return userMapper.selectUserByUid(user.getUid());
     }
 }

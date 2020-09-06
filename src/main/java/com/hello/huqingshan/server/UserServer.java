@@ -19,27 +19,17 @@ public class UserServer {
             return userMapper.selectUser();
     }
 
-    //注册用户
-    public void registerUser(User user){
-        //在插入用户之前需要对用户密码进行加密
-        String password = user.getPassword();
-        int rowid = userMapper.registerUser(user);
-        System.out.println(rowid);
-    }
-
     //通过id删除用户
-    public void deleteUserByUid(long uid){
-        int rowid =  userMapper.deleteUserByUid(uid);
-        System.out.println(rowid);
+    public int deleteUserByUid(long uid){
+        return userMapper.deleteUserByUid(uid);
     }
 
     //通过id更新用户
-    public void updateUserInfoByUid(User user){
-        System.out.println(user);
-        int rowid =  userMapper.updateUserInfoByUid(user);
-        System.out.println(rowid);
+    public int updateUserInfoByUid(User user){
+        return userMapper.updateUserInfoByUid(user);
     }
 
+    //通过id查找用户
     public User selectUserByUid(long uid){
         return userMapper.selectUserByUid(uid);
     }
