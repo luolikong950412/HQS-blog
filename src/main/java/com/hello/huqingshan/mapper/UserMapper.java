@@ -17,8 +17,8 @@ public interface UserMapper {
 
     int updateUserInfoByUid(User user);
 
+    int registerUser(User user);
+
     List<Role> selectRolesByUid(long uid);
 
-    //插入，更新，删除默认返回影响的行数
-    int registerUser(User user);
 }

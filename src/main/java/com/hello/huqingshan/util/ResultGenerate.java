@@ -1,5 +1,7 @@
 package com.hello.huqingshan.util;
 
+import com.hello.huqingshan.model.Result;
+
 public class ResultGenerate {
 
     //全局变量，解耦?
@@ -21,7 +23,7 @@ public class ResultGenerate {
 
 
     //这里只是用静态方法封装了，其实也可以直接使用Result类
-    public static <T> Result<T> getSuccessResult(T data,String token,String message){
+    public static <T> Result<T> getSuccessResult(T data, String token, String message){
         Result<T> result = new Result<>();
         result.setCode(SUCCESS_CODE);
         result.setMessage(message);

@@ -11,12 +11,10 @@ public class LoginServer {
     @Autowired
     private UserMapper userMapper;
 
-    //用户注册
     public int registerUser(User user){
         return userMapper.registerUser(user);
     }
 
-    //用户登录
     public User login(User user){
         return userMapper.selectUserByUid(user.getUid());
     }

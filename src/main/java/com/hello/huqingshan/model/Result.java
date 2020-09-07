@@ -1,4 +1,4 @@
-package com.hello.huqingshan.util;
+package com.hello.huqingshan.model;
 
 import lombok.Data;
 import lombok.Getter;

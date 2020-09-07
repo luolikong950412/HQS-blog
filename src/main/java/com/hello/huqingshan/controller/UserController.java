@@ -4,7 +4,7 @@ import com.hello.huqingshan.mapper.UserMapper;
 import com.hello.huqingshan.model.Role;
 import com.hello.huqingshan.model.User;
 import com.hello.huqingshan.server.UserServer;
-import com.hello.huqingshan.util.Result;
+import com.hello.huqingshan.model.Result;
 import com.hello.huqingshan.util.ResultGenerate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
