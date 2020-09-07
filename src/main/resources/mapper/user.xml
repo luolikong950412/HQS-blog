@@ -6,8 +6,32 @@
 <mapper namespace="com.hello.huqingshan.mapper.UserMapper">
     <!-- 如果返回的是集合，应该是集合包含的对象的类型 -官网 -->
     <!-- parametertype是可选的，mybatis会自动推断,建议写 -官网-->
-    <select id="selectUser" resultType="com.hello.huqingshan.model.User">
+    <!-- resultType也是可以自动推断的，其实不用写 -->
+    
+    <!--查询所用用户-->
+    <select id="selectUser" resultMap="usermap">
         select * from user
+    </select>
+    
+    <resultMap id="usermap" type="com.hello.huqingshan.model.User">
+        <!-- user的roleList是一个包含role的集合，这里配置要封装的类型 -->
+        <!-- select是要执行的查询用户的角色的语句，根据用户id查询用户角色-->
+        <collection property="roleList" ofType="com.hello.huqingshan.model.Role" select="selectRolesByUid" column="uid">
+            <id property="RoleId" column="rid"/>
+            <result property="RoleName" column="name"/>
+        </collection>
+    </resultMap>
+
+    <!--解决列名不匹配-->
+    <resultMap id="rolemap" type="com.hello.huqingshan.model.Role">
+        <!--主键-->
+        <id property="RoleId" column="rid"/>
+        <result property="RoleName" column="name"/>
+    </resultMap>
+
+    <!--根据用户id查找有拥有的权限-->
+    <select id="selectRolesByUid" resultMap="rolemap">
+        select role.* from role inner join user_role on role.rid = user_role.role_id where user_role.user_id = #{uid}
     </select>
 
     <update id="updateUserInfoByUid">
@@ -25,14 +49,17 @@
         where uid = #{uid}
     </update>
 
+    <!--根据用户id删除用户，同时需要删除用户角色关联表,角色不需要删除-->
     <delete id="deleteUserByUid">
         delete from user where uid = #{uid}
     </delete>
 
-    <select id="selectUserByUid" resultType="com.hello.huqingshan.model.User">
+    <!--根据用户ID查询用户信息，包括用户所拥有的角色-->
+    <select id="selectUserByUid">
         select * from user where uid = #{uid}
     </select>
 
+    <!--用户注册-->
     <insert id="registerUser">
         insert into user (username,password,email,nickname,icon) values (#{username},#{password},#{email},#{nickname},#{icon})
     </insert>

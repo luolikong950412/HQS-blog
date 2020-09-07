@@ -1,5 +1,7 @@
 package com.hello.huqingshan.controller;
 
+import com.hello.huqingshan.mapper.UserMapper;
+import com.hello.huqingshan.model.Role;
 import com.hello.huqingshan.model.User;
 import com.hello.huqingshan.server.UserServer;
 import com.hello.huqingshan.util.Result;
@@ -17,6 +19,13 @@ public class UserController {
 
     @Autowired
     private UserServer userServer;
+    @Autowired
+    private UserMapper userMapper;
+
+    @RequestMapping(value = "/role",method = RequestMethod.GET)
+    public List<Role> selectRole(){
+        return null;
+    }
 
     //查询所用用户
     @RequestMapping(value = "/user",method = RequestMethod.GET)

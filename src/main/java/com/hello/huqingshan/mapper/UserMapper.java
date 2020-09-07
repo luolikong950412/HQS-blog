@@ -1,5 +1,6 @@
 package com.hello.huqingshan.mapper;
 
+import com.hello.huqingshan.model.Role;
 import com.hello.huqingshan.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,7 +17,8 @@ public interface UserMapper {
 
     int updateUserInfoByUid(User user);
 
-    //用户注册，可以直接接收一个user对象吗
+    List<Role> selectRolesByUid(long uid);
+
     //插入，更新，删除默认返回影响的行数
     int registerUser(User user);
 }

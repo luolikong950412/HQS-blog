@@ -14,7 +14,4 @@ public class Role {
 
     public Role(){}
 
-    public Role(String RoleName){
-        this.RoleName = RoleName;
-    }
 }

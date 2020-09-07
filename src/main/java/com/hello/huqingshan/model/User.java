@@ -21,7 +21,8 @@ public class User {
     //需要注意的是数值类型，和service传递的，controller传递的类型是要一样的
     private long uid;
     private boolean status;
-    private List<Tag> tagList;
+    //由于在mysql中并没有数组字段，该如何处理
+    private List<Role> roleList;
 
     @JsonFormat(pattern = "yyyy年MM月dd号 HH:mm:ss") //把从数据库获取的时间格式化,不传时区行不行
     @DateTimeFormat(pattern = "yyyy年-MM月-dd号 HH:mm:ss") //把传入的时间格式化
