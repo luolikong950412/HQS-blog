@@ -9,4 +9,12 @@ import java.util.List;
 public interface ArticleMapper {
 
     List<Article> selectArticle();
+
+    Article selectArticleById(long id);
+
+    int deleteArticleById(long id);
+
+    int updateArticle(Article article);
+
+    int addArticle(Article article);
 }

@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class Tag {
 
-    private String tagname;
-    private int tagid;
+    private String tagName;
+    private int tagId;
 
 }

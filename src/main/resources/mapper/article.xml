@@ -4,7 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hello.huqingshan.mapper.ArticleMapper">
-    <select id="selectArticle">
+
+
+    <select id="selectArticle" resultMap="articlemap">
         select * from article
+        inner join article_tag on article.art_id = article_tag.art_id
+        inner join tag on article_tag.tag_id = tag.tag_id
+    </select>
+
+    <resultMap id="articlemap" type="com.hello.huqingshan.model.Article">
+        <id property="id" column="art_id"/>
+        <result property="title" column="article_title"/>
+        <result property="content" column="article_content"/>
+        <result property="createdate" column="article_date"/>
+        <result property="author" column="author"/>
+        <!--这个proerty属性和column属性是做什么的呢-->
+        <collection property="tagList" ofType="com.hello.huqingshan.model.Tag">
+            <id property="tagId" column="tag_id"/>
+            <result property="tagName" column="tag_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectArticleById" resultMap="articlemap">
+        select * from article
+        inner join article_tag on article.art_id = article_tag.art_id
+        inner join tag on article_tag.tag_id = tag.tag_id
+        where article.art_id = #{id}
     </select>
 </mapper>

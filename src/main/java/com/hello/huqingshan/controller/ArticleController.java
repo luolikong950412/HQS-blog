@@ -7,33 +7,42 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 先不对返回结果进行判断，只是进行获取和插入，后面细写逻辑
+ */
+
 @RestController
 public class ArticleController {
     @Autowired
     private ArticleServer articleServer;
 
+    //获取所有
     @RequestMapping(value = "/article",method = RequestMethod.GET)
     public List<Article> selectArticle(){
         return articleServer.selectArticle();
     }
 
+    //获取指定
     @RequestMapping(value = "/article/{id}",method = RequestMethod.GET)
     public Article selectArticleById(@PathVariable long id){
-        return null;
+        return articleServer.selectArticleById(id);
     }
 
+    //删除
     @RequestMapping(value = "/article/{id}",method = RequestMethod.DELETE)
-    public void deleteArticleById(@PathVariable long id){
-
+    public int deleteArticleById(@PathVariable long id){
+        return articleServer.deleteArticleById(id);
     }
 
+    //更新
     @RequestMapping(value = "/article",method = RequestMethod.PUT)
-    public void updateArticle(@RequestBody Article article){
-
+    public int updateArticle(@RequestBody Article article){
+        return articleServer.updateArticleById(article);
     }
 
-    @RequestMapping(value = "/article/{id}",method = RequestMethod.POST)
-    public void addArticle(@PathVariable long id){
-
+    //添加
+    @RequestMapping(value = "/article",method = RequestMethod.POST)
+    public int addArticle(Article article){
+        return articleServer.addArticle(article);
     }
 }

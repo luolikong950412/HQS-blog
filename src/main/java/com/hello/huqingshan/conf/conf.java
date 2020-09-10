@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class conf {
 
-    @Bean //默认情况下方法名为bean的名字
+    @Bean
     public void test(){
         System.out.println("this is bean");
     }

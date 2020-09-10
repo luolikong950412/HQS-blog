@@ -16,19 +16,19 @@ public class ArticleServer {
         return articleMapper.selectArticle();
     }
     public Article selectArticleById(long id){
-        return null;
+        return articleMapper.selectArticleById(id);
     }
 
-    public void addArticle(Article article){
-
+    public int addArticle(Article article){
+        return articleMapper.addArticle(article);
     }
 
-    public void deleteArticle(long id){
-
+    public int deleteArticleById(long id){
+        return articleMapper.deleteArticleById(id);
     }
 
-    public void updateArticleById(Article article){
-
+    public int updateArticleById(Article article){
+        return articleMapper.updateArticle(article);
     }
 
 }

@@ -7,6 +7,11 @@
     <!-- 如果返回的是集合，应该是集合包含的对象的类型 -官网 -->
     <!-- parametertype是可选的，mybatis会自动推断,建议写 -官网-->
     <!-- resultType也是可以自动推断的，其实不用写 -->
+
+    <!--根据用户ID查询用户信息，包括用户所拥有的角色-->
+    <select id="selectUserByUid">
+        select * from user where uid = #{uid}
+    </select>
     
     <!--查询所用用户-->
     <select id="selectUser" resultMap="usermap">
@@ -31,7 +36,9 @@
 
     <!--根据用户id查找有拥有的权限-->
     <select id="selectRolesByUid" resultMap="rolemap">
-        select role.* from role inner join user_role on role.rid = user_role.role_id where user_role.user_id = #{uid}
+        select role.* from role
+        inner join user_role on role.rid = user_role.role_id
+        where user_role.user_id = #{uid}
     </select>
 
     <update id="updateUserInfoByUid">
@@ -54,14 +61,10 @@
         delete from user where uid = #{uid}
     </delete>
 
-    <!--根据用户ID查询用户信息，包括用户所拥有的角色-->
-    <select id="selectUserByUid">
-        select * from user where uid = #{uid}
-    </select>
-
     <!--用户注册-->
     <insert id="registerUser">
-        insert into user (username,password,email,nickname,icon) values (#{username},#{password},#{email},#{nickname},#{icon})
+        insert into user (username,password,email,nickname,icon)
+        values (#{username},#{password},#{email},#{nickname},#{icon})
     </insert>
 
 </mapper>
