@@ -42,7 +42,7 @@ public class ArticleController {
 
     //添加
     @RequestMapping(value = "/article",method = RequestMethod.POST)
-    public int addArticle(Article article){
-        return articleServer.addArticle(article);
+    public void addArticle(@RequestBody Article article){
+         articleServer.addArticle(article);
     }
 }

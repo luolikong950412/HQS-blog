@@ -5,7 +5,8 @@
 
 <mapper namespace="com.hello.huqingshan.mapper.ArticleMapper">
 
-
+    <!--使用内连接可能会出现查不到没有id的文章-->
+    <!--查询所有-->
     <select id="selectArticle" resultMap="articlemap">
         select * from article
         inner join article_tag on article.art_id = article_tag.art_id
@@ -19,16 +20,40 @@
         <result property="createdate" column="article_date"/>
         <result property="author" column="author"/>
         <!--这个proerty属性和column属性是做什么的呢-->
+        <!--property是javabena的属性，是一个集合类型List<Role>，和上面result是一样的-->
         <collection property="tagList" ofType="com.hello.huqingshan.model.Tag">
             <id property="tagId" column="tag_id"/>
             <result property="tagName" column="tag_name"/>
         </collection>
     </resultMap>
 
+    <!--通过id查询-->
     <select id="selectArticleById" resultMap="articlemap">
         select * from article
         inner join article_tag on article.art_id = article_tag.art_id
         inner join tag on article_tag.tag_id = tag.tag_id
         where article.art_id = #{id}
     </select>
+
+    <!--查询文章id通过文章标题-->
+    <select id="selectIdByTitle" resultMap="articleMap">
+        select * from article where article_title = #{title}
+    </select>
+
+    <resultMap id="articleMap" type="com.hello.huqingshan.model.Article">
+        <id property="id" column="art_id"/>
+        <result property="title" column="article_title"/>
+        <result property="content" column="article_content"/>
+        <result property="createdate" column="article_date"/>
+        <result property="author" column="author"/>
+    </resultMap>
+
+
+    <!--只能在业务层插入文章标签？-->
+    <!--插入文章的同时还要在article_tag里面插入关系-->
+    <!--添加-->
+    <insert id="addArticle" parameterType="com.hello.huqingshan.model.Article">
+        insert into article (article_title,article_content,author)
+        values (#{title},#{content},#{author})
+    </insert>
 </mapper>

@@ -1,5 +1,6 @@
 package com.hello.huqingshan.mapper;
 
+import com.hello.huqingshan.model.Role;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -7,8 +8,13 @@ import java.util.List;
 @Mapper
 public interface RoleMapper {
 
-    List<RoleMapper> selectRoles();
+    //查询
+    List<Role> selectRoles();
 
-    RoleMapper selectRoleByUserId(long id);
+    //查询
+    Role selectRoleByUserId(long id);
+
+    //添加
+    int addRole(Role role);
 
 }

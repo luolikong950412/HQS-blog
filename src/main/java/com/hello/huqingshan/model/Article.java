@@ -15,7 +15,7 @@ import java.util.List;
 public class Article {
 
     private String title;
-    private int id;
+    private long id;
     private String content;
     @JsonFormat(pattern = "yyyy年dd月MM日 HH:mm:ss")
     private LocalDateTime createdate;
