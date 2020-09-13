@@ -16,9 +16,9 @@ public class ArticleController {
     @Autowired
     private ArticleServer articleServer;
 
-    //获取所有
+    //获取所有文章
     @RequestMapping(value = "/article",method = RequestMethod.GET)
-    public List<Article> selectArticle(){
+    public List<Article> selectAllArticles(){
         return articleServer.selectArticle();
     }
 

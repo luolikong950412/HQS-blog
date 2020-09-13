@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
 @Getter
+@Setter
 @ToString
-public class Role {
-    private String RoleName;
-    private long RoleId;
+public class Permission {
+    private long Pid;
+    private String method;
+    private String url;
 }

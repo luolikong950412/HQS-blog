@@ -13,14 +13,17 @@ public class UserServer {
     @Autowired
     private UserMapper userMapper;
 
+    //查询所有用户
     public List<User> selectUser(){
             return userMapper.selectUser();
     }
 
+    //通过id删除
     public int deleteUserByUid(long uid){
         return userMapper.deleteUserByUid(uid);
     }
 
+    //更新
     public int updateUserInfoByUid(User user){
         return userMapper.updateUserInfoByUid(user);
     }

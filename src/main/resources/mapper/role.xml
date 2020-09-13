@@ -3,8 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hello.huqingshan.mapper.UserMapper">
-    <select id="selectRoles">
+<mapper namespace="com.hello.huqingshan.mapper.RoleMapper">
+
+    <!--查找所有-->
+    <select id="selectAllRoles" resultMap="roleMap">
         select * from role
     </select>
+    <resultMap id="roleMap" type="com.hello.huqingshan.model.Role">
+        <id column="rid" property="RoleId"/>
+        <result column="name" property="RoleName"/>
+    </resultMap>
+
+    <!--添加-->
+    <insert id="addRole">
+        insert into role (name) values (#{RoleName})
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteRoleById">
+        delete from role where rid = #{id}
+    </delete>
+
 </mapper>

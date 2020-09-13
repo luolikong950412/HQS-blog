@@ -24,9 +24,9 @@ public class TagController {
         return tagServer.deleteTagById(id);
     }
 
-    //获取
+    //获取所有标签
     @RequestMapping(value = "/tag",method = RequestMethod.GET)
-    public List<Tag> selectTag(){
+    public List<Tag> selectAllTags(){
         return tagServer.selectTag();
     }
 }

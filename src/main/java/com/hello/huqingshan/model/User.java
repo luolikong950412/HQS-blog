@@ -31,5 +31,4 @@ public class User {
 
     //为什么还要提供一个无参构造函数给mybatis如果存在有参构造函数的话
     public User(){ }
-
 }

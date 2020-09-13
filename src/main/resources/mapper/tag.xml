@@ -9,8 +9,6 @@
     <select id="selectTag" resultMap="tagmap">
         select * from tag
     </select>
-
-    <!--查询结果映射-->
     <resultMap id="tagmap" type="com.hello.huqingshan.model.Tag">
         <id property="tagId" column="tag_id"/>
         <result property="tagName" column="tag_name"/>
@@ -26,7 +24,7 @@
         delete from tag where tag_id = #{id}
     </delete>
 
-    <!--文章和标签映射-->
+    <!--添加文章和标签映射-->
     <insert id="add_article_tag">
         insert into article_tag (art_id,tag_id) values
         <foreach collection="tagList" index="" item="item" separator=",">

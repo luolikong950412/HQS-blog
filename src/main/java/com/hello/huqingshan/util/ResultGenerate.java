@@ -1,7 +1,5 @@
 package com.hello.huqingshan.util;
 
-import com.hello.huqingshan.model.Result;
-
 public class ResultGenerate {
 
     //全局变量，解耦?

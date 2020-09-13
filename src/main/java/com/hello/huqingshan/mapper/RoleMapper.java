@@ -9,12 +9,12 @@ import java.util.List;
 public interface RoleMapper {
 
     //查询
-    List<Role> selectRoles();
-
-    //查询
-    Role selectRoleByUserId(long id);
+    List<Role> selectAllRoles();
 
     //添加
     int addRole(Role role);
+
+    //删除
+    int deleteRoleById(long id);
 
 }

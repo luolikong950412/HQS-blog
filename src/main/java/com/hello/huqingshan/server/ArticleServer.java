@@ -32,7 +32,7 @@ public class ArticleServer {
         //如何获取文章的id呢，得插入之后才知道，或者插入之后找出来?
         articleMapper.addArticle(article);
         Article article1 = articleMapper.selectIdByTitle(article.getTitle());
-        //添加标签
+        //添加文章和标签的映射
         List<Tag> tagList = article.getTagList();
         tagMapper.add_article_tag(tagList,article1.getId());
 

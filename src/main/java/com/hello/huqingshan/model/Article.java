@@ -13,7 +13,6 @@ import java.util.List;
 @Setter
 @ToString
 public class Article {
-
     private String title;
     private long id;
     private String content;
@@ -21,5 +20,4 @@ public class Article {
     private LocalDateTime createdate;
     private String author;
     private List<Tag> tagList;
-
 }

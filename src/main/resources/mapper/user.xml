@@ -8,7 +8,7 @@
     <!-- parametertype是可选的，mybatis会自动推断,建议写 -官网-->
     <!-- resultType也是可以自动推断的，其实不用写 -->
 
-    <!--根据用户ID查询用户信息，包括用户所拥有的角色-->
+    <!--根据用户ID查询用户信息-->
     <select id="selectUserByUid">
         select * from user where uid = #{uid}
     </select>
@@ -17,7 +17,6 @@
     <select id="selectUser" resultMap="usermap">
         select * from user
     </select>
-    
     <resultMap id="usermap" type="com.hello.huqingshan.model.User">
         <!-- user的roleList是一个包含role的集合，这里配置要封装的类型 -->
         <!-- select是要执行的查询用户的角色的语句，根据用户id查询用户角色-->
@@ -27,19 +26,17 @@
         </collection>
     </resultMap>
 
-    <!--解决列名不匹配-->
-    <resultMap id="rolemap" type="com.hello.huqingshan.model.Role">
-        <!--主键-->
-        <id property="RoleId" column="rid"/>
-        <result property="RoleName" column="name"/>
-    </resultMap>
-
     <!--根据用户id查找有拥有的权限-->
     <select id="selectRolesByUid" resultMap="rolemap">
         select role.* from role
         inner join user_role on role.rid = user_role.role_id
         where user_role.user_id = #{uid}
     </select>
+    <resultMap id="rolemap" type="com.hello.huqingshan.model.Role">
+        <!--主键-->
+        <id property="RoleId" column="rid"/>
+        <result property="RoleName" column="name"/>
+    </resultMap>
 
     <update id="updateUserInfoByUid">
         <!-- 多余的逗号会被删掉 -->
