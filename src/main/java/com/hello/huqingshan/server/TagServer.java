@@ -18,6 +18,7 @@ public class TagServer {
     }
 
     //删除
+    //已经关联标签的文章怎么办
     public int deleteTagById(long id){
         return tagMapper.deleteTagById(id);
     }
@@ -26,4 +27,6 @@ public class TagServer {
     public List<Tag> selectTag(){
         return tagMapper.selectTag();
     }
+
+    //获取指定标签下的文章
 }

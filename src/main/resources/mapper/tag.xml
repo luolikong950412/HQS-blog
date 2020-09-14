@@ -24,12 +24,4 @@
         delete from tag where tag_id = #{id}
     </delete>
 
-    <!--添加文章和标签映射-->
-    <insert id="add_article_tag">
-        insert into article_tag (art_id,tag_id) values
-        <foreach collection="tagList" index="" item="item" separator=",">
-            (#{articleId},#{item.tagId})
-        </foreach>
-    </insert>
-
 </mapper>

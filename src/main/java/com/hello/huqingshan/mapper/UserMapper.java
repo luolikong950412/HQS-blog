@@ -13,9 +13,17 @@ public interface UserMapper {
 
     User selectUserByUid(long uid);
 
+    //删除用户
     int deleteUserByUid(long uid);
 
+    //同时删除用户角色映射
+    int deleteUserRoleById(long id);
+
+    //更新用户
     int updateUserInfoByUid(User user);
+
+    //同时更新用户角色映射表
+    int updateUserRoleById(long id);
 
     int registerUser(User user);
 

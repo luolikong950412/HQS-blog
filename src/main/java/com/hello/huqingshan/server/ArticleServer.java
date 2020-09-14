@@ -1,7 +1,6 @@
 package com.hello.huqingshan.server;
 
 import com.hello.huqingshan.mapper.ArticleMapper;
-import com.hello.huqingshan.mapper.TagMapper;
 import com.hello.huqingshan.model.Article;
 import com.hello.huqingshan.model.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,39 +12,52 @@ import java.util.List;
 public class ArticleServer {
     @Autowired
     private ArticleMapper articleMapper;
-    @Autowired
-    private TagMapper tagMapper;
 
     //查询
-    public List<Article> selectArticle(){
+    public List<Article> getAllArticle(){
         return articleMapper.selectArticle();
     }
 
     //查询
-    public Article selectArticleById(long id){
+    public Article getArticleByArticleId(long id){
         return articleMapper.selectArticleById(id);
     }
 
-    //添加
-    public void addArticle(Article article){
-        //如何让这两个其中一个失败另一个不执行呢
-        //如何获取文章的id呢，得插入之后才知道，或者插入之后找出来?
-        articleMapper.addArticle(article);
-        Article article1 = articleMapper.selectIdByTitle(article.getTitle());
-        //添加文章和标签的映射
-        List<Tag> tagList = article.getTagList();
-        tagMapper.add_article_tag(tagList,article1.getId());
-
+    //添加文章
+    public int addArticle(Article article){
+        //插入文章失败后只能删除文章？
+        if(articleMapper.addArticle(article) != 0){
+            long id = article.getId();
+            //是否需要判断标签列表是否为空
+            List<Tag> tagList = article.getTagList();
+            return articleMapper.addArticleTag(tagList,id);
+        }
+        return 0;
     }
 
     //删除
-    public int deleteArticleById(long id){
-        return articleMapper.deleteArticleById(id);
+    public int deleteArticleByArticleId(long id){
+        //删除文章
+        if(articleMapper.deleteArticleById(id)!=0){
+            //删除文章标签映射
+            return articleMapper.deleteArticleTagById(id);
+        }
+        return 0;
     }
 
     //更新
-    public int updateArticleById(Article article){
-        return articleMapper.updateArticle(article);
+    //这里更新文章和文章标签是一起的，没有把更新文章和标签拆开
+    public int updateArticleById(Article article,long id){
+        //把id写入model
+        article.setId(id);
+        //更新文章
+        if(articleMapper.updateArticle(article)!=0){
+            //更新文章标签映射
+            //是否需要判断用户标签没有修改，不需要改变
+//            return articleMapper.updateArticleTagById(article.getId());
+            return 1;
+        }
+        return 0;
     }
 
 }

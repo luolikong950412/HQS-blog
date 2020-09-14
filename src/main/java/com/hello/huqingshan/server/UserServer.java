@@ -20,7 +20,12 @@ public class UserServer {
 
     //通过id删除
     public int deleteUserByUid(long uid){
-        return userMapper.deleteUserByUid(uid);
+        //通过id删除用户
+        if(userMapper.deleteUserByUid(uid)!=0){
+            //同时删除用户角色映射
+            return userMapper.deleteUserRoleById(uid);
+        }
+        return 0;
     }
 
     //更新
@@ -28,6 +33,7 @@ public class UserServer {
         return userMapper.updateUserInfoByUid(user);
     }
 
+    //通过id查询用户
     public User selectUserByUid(long uid){
         return userMapper.selectUserByUid(uid);
     }

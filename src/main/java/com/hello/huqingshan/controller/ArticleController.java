@@ -18,31 +18,31 @@ public class ArticleController {
 
     //获取所有文章
     @RequestMapping(value = "/article",method = RequestMethod.GET)
-    public List<Article> selectAllArticles(){
-        return articleServer.selectArticle();
+    public List<Article> getAllArticles(){
+        return articleServer.getAllArticle();
     }
 
     //获取指定
     @RequestMapping(value = "/article/{id}",method = RequestMethod.GET)
-    public Article selectArticleById(@PathVariable long id){
-        return articleServer.selectArticleById(id);
+    public Article getArticleByArticleId(@PathVariable long id){
+        return articleServer.getArticleByArticleId(id);
     }
 
     //删除
     @RequestMapping(value = "/article/{id}",method = RequestMethod.DELETE)
-    public int deleteArticleById(@PathVariable long id){
-        return articleServer.deleteArticleById(id);
+    public int deleteArticleByArticleId(@PathVariable long id){
+        return articleServer.deleteArticleByArticleId(id);
     }
 
     //更新
-    @RequestMapping(value = "/article",method = RequestMethod.PUT)
-    public int updateArticle(@RequestBody Article article){
-        return articleServer.updateArticleById(article);
+    @RequestMapping(value = "/article/{id}",method = RequestMethod.PUT)
+    public int updateArticle(@RequestBody Article article,@PathVariable long id){
+        return articleServer.updateArticleById(article,id);
     }
 
     //添加
     @RequestMapping(value = "/article",method = RequestMethod.POST)
-    public void addArticle(@RequestBody Article article){
-         articleServer.addArticle(article);
+    public int addArticle(@RequestBody Article article){
+         return articleServer.addArticle(article);
     }
 }

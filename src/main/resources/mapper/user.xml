@@ -9,33 +9,36 @@
     <!-- resultType也是可以自动推断的，其实不用写 -->
 
     <!--根据用户ID查询用户信息-->
-    <select id="selectUserByUid">
-        select * from user where uid = #{uid}
+    <select id="selectUserByUid" resultMap="usermap">
+        select * from user
+        left join user_role on user.uid = user_role.user_id
+        left join role on role.rid = user_role.role_id
+        where uid = #{uid}
     </select>
     
     <!--查询所用用户-->
     <select id="selectUser" resultMap="usermap">
         select * from user
+        left join user_role on user.uid = user_role.user_id
+        left join role on role.rid = user_role.role_id;
     </select>
+
+    <!--不管是否相同都要写-->
     <resultMap id="usermap" type="com.hello.huqingshan.model.User">
+        <id column="uid" property="uid"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="icon" property="icon"/>
+        <result column="nickname" property="nickname"/>
+        <result column="status" property="status"/>
+        <result column="createdate" property="createdate"/>
+        <result column="email" property="email"/>
         <!-- user的roleList是一个包含role的集合，这里配置要封装的类型 -->
         <!-- select是要执行的查询用户的角色的语句，根据用户id查询用户角色-->
-        <collection property="roleList" ofType="com.hello.huqingshan.model.Role" select="selectRolesByUid" column="uid">
+        <collection property="roleList" ofType="com.hello.huqingshan.model.Role">
             <id property="RoleId" column="rid"/>
             <result property="RoleName" column="name"/>
         </collection>
-    </resultMap>
-
-    <!--根据用户id查找有拥有的权限-->
-    <select id="selectRolesByUid" resultMap="rolemap">
-        select role.* from role
-        inner join user_role on role.rid = user_role.role_id
-        where user_role.user_id = #{uid}
-    </select>
-    <resultMap id="rolemap" type="com.hello.huqingshan.model.Role">
-        <!--主键-->
-        <id property="RoleId" column="rid"/>
-        <result property="RoleName" column="name"/>
     </resultMap>
 
     <update id="updateUserInfoByUid">
@@ -53,12 +56,21 @@
         where uid = #{uid}
     </update>
 
+    <!--同时更新用户角色-->
+
     <!--根据用户id删除用户，同时需要删除用户角色关联表,角色不需要删除-->
     <delete id="deleteUserByUid">
         delete from user where uid = #{uid}
     </delete>
 
+    <!--同时删除用户角色映射-->
+    <delete id="deleteUserRoleById">
+        delete from user_role where user_id = #{id}
+    </delete>
+
     <!--用户注册-->
+    <!--所有用户注册的都是普通用户-->
+    <!--这里需要写如数据库还是如何在数据库中设置默认-->
     <insert id="registerUser">
         insert into user (username,password,email,nickname,icon)
         values (#{username},#{password},#{email},#{nickname},#{icon})

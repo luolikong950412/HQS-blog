@@ -26,7 +26,7 @@
         </collection>
     </resultMap>
 
-    <!--通过id查询-->
+    <!--通过id查询文章-->
     <select id="selectArticleById" resultMap="articlemap">
         select * from article
         left join article_tag on article.art_id = article_tag.art_id
@@ -34,33 +34,51 @@
         where article.art_id = #{id}
     </select>
 
-    <!--查询文章id通过文章标题-->
-    <select id="selectIdByTitle" resultMap="articleMap">
-        select * from article where article_title = #{title}
-    </select>
-
-    <resultMap id="articleMap" type="com.hello.huqingshan.model.Article">
-        <id property="id" column="art_id"/>
-        <result property="title" column="article_title"/>
-        <result property="content" column="article_content"/>
-        <result property="createdate" column="article_date"/>
-        <result property="author" column="author"/>
-    </resultMap>
-
-    <!--添加-->
-    <insert id="addArticle" parameterType="com.hello.huqingshan.model.Article">
+    <!--添加,获取返回的文章主键
+    keyProperty把返回的主键赋给实体的id，然后获取对象的id就可以了，直接返回的仍然是操作的行数-->
+    <insert id="addArticle" parameterType="com.hello.huqingshan.model.Article" useGeneratedKeys="true" keyProperty="id">
         insert into article (article_title,article_content,author)
         values (#{title},#{content},#{author})
     </insert>
 
-    <!--更新-->
-    <update id="updateArticle">
-        update article set
-    </update>
+    <!--添加文章的同时添加文章标签映射-->
+    <insert id="addArticleTag">
+        insert into article_tag (art_id,tag_id) values
+        <foreach collection="tagList" item="item" separator=",">
+            (
+            #{id},
+            #{item.tagId}
+            )
+        </foreach>
+    </insert>
 
     <!--删除-->
     <delete id="deleteArticleById">
         delete from article where art_id = #{id}
     </delete>
+
+    <!--删除的同时删除文章标签映射-->
+    <delete id="deleteArticleTagById">
+        delete from article_tag where art_id = #{id}
+    </delete>
+
+
+    <!--更新-->
+    <update id="updateArticle">
+        update article
+        <set>
+            <if test="title!=null">article_title = #{title},</if>
+            <if test="author!=null">article_author = #{author},</if>
+            <if test="content!=null">article_content = #{content}</if>
+        </set>
+        where art_id = #{id}
+    </update>
+
+    <!--更新文章标签映射-->
+    <update id="updateArticleTagById">
+        <foreach collection="">
+
+        </foreach>
+    </update>
 
 </mapper>
