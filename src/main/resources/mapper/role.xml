@@ -20,6 +20,7 @@
     </insert>
 
     <!--删除-->
+    <!--删除要谨慎，因为删除后需要在user_role里面删除映射需要某种逻辑判断-->
     <delete id="deleteRoleById">
         delete from role where rid = #{id}
     </delete>

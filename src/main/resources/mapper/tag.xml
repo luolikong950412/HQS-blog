@@ -18,10 +18,25 @@
     <insert id="addTag">
         insert into tag (tag_name) values (#{tagName})
     </insert>
-    <!--删除-->
 
+    <!--删除-->
     <delete id="deleteTagById">
         delete from tag where tag_id = #{id}
     </delete>
+
+    <select id="getAllArticleByTagId" resultMap="tagMap">
+        select article.* from article
+        left join article_tag on article.art_id = article_tag.art_id
+        left join tag on article_tag.tag_id = tag.tag_id
+        where tag.tag_id = #{id}
+    </select>
+
+    <resultMap id="tagMap" type="com.hello.huqingshan.model.Article">
+        <id property="id" column="art_id"/>
+        <result property="title" column="article_title"/>
+        <result property="content" column="article_content"/>
+        <result property="createdate" column="article_date"/>
+        <result property="author" column="author"/>
+    </resultMap>
 
 </mapper>

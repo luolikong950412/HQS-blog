@@ -2,6 +2,7 @@ package com.hello.huqingshan.controller;
 
 import com.hello.huqingshan.model.Article;
 import com.hello.huqingshan.server.ArticleServer;
+import com.hello.huqingshan.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,32 +18,37 @@ public class ArticleController {
     private ArticleServer articleServer;
 
     //获取所有文章
-    @RequestMapping(value = "/article",method = RequestMethod.GET)
-    public List<Article> getAllArticles(){
-        return articleServer.getAllArticle();
+    @GetMapping("/article")
+    public Result<List<Article>>  getAllArticles(){
+        List<Article> list = articleServer.getAllArticle();
+        return Result.ofSuccess(null,list);
     }
 
     //获取指定
-    @RequestMapping(value = "/article/{id}",method = RequestMethod.GET)
-    public Article getArticleByArticleId(@PathVariable long id){
-        return articleServer.getArticleByArticleId(id);
+    @GetMapping("/article/{id}")
+    public Result<Article> getArticleByArticleId(@PathVariable long id){
+        Article article =  articleServer.getArticleByArticleId(id);
+        return Result.ofSuccess(null,article);
     }
 
     //删除
-    @RequestMapping(value = "/article/{id}",method = RequestMethod.DELETE)
-    public int deleteArticleByArticleId(@PathVariable long id){
-        return articleServer.deleteArticleByArticleId(id);
+    @DeleteMapping("/article/{id}")
+    public Result<Integer> deleteArticleByArticleId(@PathVariable long id){
+        int affectRows =  articleServer.deleteArticleByArticleId(id);
+        return Result.ofSuccess(null,affectRows);
     }
 
     //更新
-    @RequestMapping(value = "/article/{id}",method = RequestMethod.PUT)
-    public int updateArticle(@RequestBody Article article,@PathVariable long id){
-        return articleServer.updateArticleById(article,id);
+    @PutMapping("/article/{id}")
+    public Result<Integer> updateArticle(@RequestBody Article article, @PathVariable long id){
+        int affectRows =  articleServer.updateArticleById(article,id);
+        return Result.ofSuccess(null,affectRows);
     }
 
     //添加
-    @RequestMapping(value = "/article",method = RequestMethod.POST)
-    public int addArticle(@RequestBody Article article){
-         return articleServer.addArticle(article);
+    @PostMapping("/article")
+    public Result<Integer> addArticle(@RequestBody Article article){
+         int affectRows = articleServer.addArticle(article);
+         return Result.ofSuccess(null,affectRows);
     }
 }

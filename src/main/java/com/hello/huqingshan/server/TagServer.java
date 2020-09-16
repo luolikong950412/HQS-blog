@@ -1,6 +1,7 @@
 package com.hello.huqingshan.server;
 
 import com.hello.huqingshan.mapper.TagMapper;
+import com.hello.huqingshan.model.Article;
 import com.hello.huqingshan.model.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,4 +30,7 @@ public class TagServer {
     }
 
     //获取指定标签下的文章
+    public List<Article> getAllArticleByTagId(long id){
+        return tagMapper.getAllArticleByTagId(id);
+    }
 }

@@ -1,17 +1,12 @@
 package com.hello.huqingshan.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class User {
 
     private String username;

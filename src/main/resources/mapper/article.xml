@@ -76,9 +76,9 @@
 
     <!--更新文章标签映射-->
     <update id="updateArticleTagById">
-        <foreach collection="">
 
-        </foreach>
     </update>
+
+    <!--一篇文章可能有多个标签，需要允许删除-->
 
 </mapper>

@@ -1,12 +1,8 @@
 package com.hello.huqingshan.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class Permission {
     private long Pid;
     private String method;

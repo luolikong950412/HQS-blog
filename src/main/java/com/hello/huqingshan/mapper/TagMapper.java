@@ -18,4 +18,7 @@ public interface TagMapper {
 
     //获取
     List<Tag> selectTag();
+
+    //获取标签下的所有文章
+    List<Article> getAllArticleByTagId(long id);
 }

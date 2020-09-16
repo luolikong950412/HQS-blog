@@ -27,6 +27,4 @@ public interface UserMapper {
 
     int registerUser(User user);
 
-    List<Role> selectRolesByUid(long uid);
-
 }

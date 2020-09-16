@@ -1,12 +1,8 @@
 package com.hello.huqingshan.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Setter
-@Getter
-@ToString
+@Data
 public class Tag {
     private String tagName;
     private int tagId;
